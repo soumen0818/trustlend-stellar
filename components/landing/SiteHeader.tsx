@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { NavItem } from "@/types/landing";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface SiteHeaderProps {
   items: NavItem[];
@@ -34,6 +35,7 @@ export function SiteHeader({ items, isAuthenticated = false }: SiteHeaderProps) 
         </nav>
 
         <div className="site-header-actions">
+          <ThemeToggle />
           <a href="#faq" className="site-nav-utility">
             Need help?
           </a>

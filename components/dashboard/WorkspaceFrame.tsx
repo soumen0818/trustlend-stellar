@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NotificationWidget } from "./NotificationWidget";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface WorkspaceLink {
   href: string;
@@ -146,6 +147,7 @@ export function WorkspaceFrame({
                 {headerWidget ?? (
                   <div className="workspace-top-actions">
                        <span className="workspace-chip">{displayName}</span>
+                       <ThemeToggle />
                       <NotificationWidget />
                   </div>
                 )}

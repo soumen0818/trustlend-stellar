@@ -9,6 +9,12 @@
   --teal: #22cf9d;
 }
 
+.dark {
+  --bg-page: #0b0d1a;
+  --ink-main: #e6e8f0;
+  --ink-soft: #a0a7c5;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -23,6 +29,7 @@ body {
   color: var(--ink-main);
   font-family: var(--font-manrope), "Segoe UI", sans-serif;
   background: var(--bg-page);
+  transition: background-color 200ms ease, color 200ms ease;
 }
 
 a {
@@ -52,6 +59,11 @@ a {
   border-bottom: 1px solid rgba(87, 103, 140, 0.14);
   background: rgba(246, 247, 252, 0.94);
   backdrop-filter: blur(10px);
+}
+
+.dark .site-header {
+  border-bottom: 1px solid rgba(160, 167, 197, 0.14);
+  background: rgba(11, 13, 26, 0.94);
 }
 
 .site-header-row {
@@ -107,9 +119,19 @@ a {
   box-shadow: 0 10px 24px rgba(60, 72, 118, 0.08);
 }
 
+.dark .site-nav-desktop {
+  border: 1px solid rgba(160, 167, 197, 0.24);
+  background: rgba(20, 24, 46, 0.82);
+}
+
 .site-nav-mobile-wrap {
   border-top: 1px solid rgba(129, 141, 181, 0.17);
   background: rgba(255, 255, 255, 0.6);
+}
+
+.dark .site-nav-mobile-wrap {
+  border-top: 1px solid rgba(160, 167, 197, 0.17);
+  background: rgba(20, 24, 46, 0.6);
 }
 
 .site-nav-mobile {
@@ -140,9 +162,18 @@ a {
   transition: background-color 160ms ease, color 160ms ease;
 }
 
+.dark .site-nav-link {
+  color: #a0a7c5;
+}
+
 .site-nav-link:hover {
   color: #5e2db4;
   background: #ede5fd;
+}
+
+.dark .site-nav-link:hover {
+  color: #a763e8;
+  background: rgba(126, 47, 208, 0.15);
 }
 
 .site-header-actions {
@@ -704,6 +735,13 @@ a {
     #f4f6fd;
 }
 
+.dark .role-dashboard-shell {
+  background:
+    radial-gradient(1200px 450px at 15% -15%, rgba(126, 47, 208, 0.15), transparent),
+    radial-gradient(800px 400px at 95% 0%, rgba(45, 211, 159, 0.14), transparent),
+    #0b0d1a;
+}
+
 .role-dashboard-card {
   width: min(1080px, 100%);
   border-radius: 1.15rem;
@@ -711,6 +749,12 @@ a {
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 22px 36px rgba(40, 26, 84, 0.14);
   padding: 1.1rem;
+}
+
+.dark .role-dashboard-card {
+  border: 1px solid rgba(160, 167, 197, 0.25);
+  background: rgba(20, 24, 46, 0.9);
+  box-shadow: 0 22px 36px rgba(0, 0, 0, 0.3);
 }
 
 .role-dashboard-card--wide {
@@ -779,6 +823,11 @@ a {
   padding: 0.9rem;
 }
 
+.dark .role-metric-card {
+  border: 1px solid rgba(160, 167, 197, 0.25);
+  background: #14182e;
+}
+
 .role-metric-value {
   margin: 0;
   color: #652cbc;
@@ -789,6 +838,10 @@ a {
   margin: 0.3rem 0 0;
   color: #66718f;
   font-size: 0.8rem;
+}
+
+.dark .role-metric-label {
+  color: #a0a7c5;
 }
 
 .role-actions {
@@ -892,6 +945,12 @@ a {
   padding: 0.35rem 0.7rem;
   font-size: 0.74rem;
   font-weight: 700;
+}
+
+.dark .workspace-chip {
+  border: 1px solid rgba(160, 167, 197, 0.3);
+  background: #14182e;
+  color: #e6e8f0;
 }
 
 .workspace-stack {
@@ -1118,6 +1177,11 @@ a {
   gap: 0.85rem;
 }
 
+.dark .workspace-sidebar {
+  border: 1px solid rgba(160, 167, 197, 0.22);
+  background: linear-gradient(180deg, #14182e 0%, #0b0d1a 100%);
+}
+
 .workspace-brand-wrap {
   display: grid;
   gap: 0.12rem;
@@ -1151,16 +1215,31 @@ a {
   transition: 220ms ease;
 }
 
-.workspace-sidebar-link:hover {
+.dark .workspace-sidebar-link {
+  color: #a0a7c5;
+}
+
+.workspace-sidebar-link:hover:not(.workspace-sidebar-link--active) {
   border-color: #d8e0f3;
   background: #ffffff;
   transform: translateX(3px);
+}
+
+.dark .workspace-sidebar-link:hover:not(.workspace-sidebar-link--active) {
+  border-color: rgba(160, 167, 197, 0.3);
+  background: #14182e;
 }
 
 .workspace-sidebar-link--active {
   border-color: rgba(126, 47, 208, 0.25);
   background: linear-gradient(90deg, rgba(126, 47, 208, 0.14), rgba(45, 211, 159, 0.11));
   color: #5d28b0;
+}
+
+.dark .workspace-sidebar-link--active {
+  border-color: rgba(167, 99, 232, 0.4);
+  background: linear-gradient(90deg, rgba(167, 99, 232, 0.18), rgba(45, 211, 159, 0.14));
+  color: #a763e8;
 }
 
 .workspace-profile-alert {
@@ -1223,6 +1302,11 @@ a {
   border: 1px solid rgba(122, 138, 177, 0.2);
   background: rgba(255, 255, 255, 0.92);
   padding: 1rem;
+}
+
+.dark .workspace-main-panel {
+  border: 1px solid rgba(160, 167, 197, 0.2);
+  background: rgba(20, 24, 46, 0.92);
 }
 
 .workspace-chart-head {
