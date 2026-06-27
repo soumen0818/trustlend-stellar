@@ -1,5 +1,5 @@
 #![no_std]
-use soroban_sdk::{contract, contractimpl, contracttype, Address, Env, String, Vec};
+use soroban_sdk::{contract, contractimpl, contracttype, Address, Env, Vec};
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -117,7 +117,9 @@ impl LendingContract {
         let interest = Self::calculate_interest(amount, interest_rate_bps, duration_days);
         // Platform fee = 1 % of interest
         let platform_fee = interest / 100;
-        let total_due = amount + interest;
+        let total_due = amount
+            .checked_add(interest)
+            .expect("Overflow computing total_due");
 
         let count: u32 = env
             .storage()
@@ -127,6 +129,14 @@ impl LendingContract {
         let loan_id = count + 1;
 
         let now = env.ledger().timestamp();
+        // Compute due_at with overflow protection: days * 86_400 seconds
+        let duration_secs: u64 = (duration_days as u64)
+            .checked_mul(86_400)
+            .expect("Overflow computing loan duration in seconds");
+        let due_at = now
+            .checked_add(duration_secs)
+            .expect("Overflow computing due_at timestamp");
+
         let loan = LoanRecord {
             id: loan_id,
             borrower: borrower.clone(),
@@ -137,7 +147,7 @@ impl LendingContract {
             total_due,
             remaining_due: total_due,
             created_at: now,
-            due_at: now + (duration_days as u64) * 86_400,
+            due_at,
             status: LoanStatus::Pending,
             escrow_id: 0,
             platform_fee,
@@ -319,8 +329,16 @@ impl LendingContract {
     // ── Private helpers ───────────────────────────────────────────────────────
 
     /// interest = principal × rate_bps × days / (10_000 × 365)
+    ///
+    /// Uses checked arithmetic so that absurdly large principals or rates
+    /// cause an explicit panic instead of silent integer wrap-around.
     fn calculate_interest(principal: i128, rate_bps: u32, days: u32) -> i128 {
-        (principal * rate_bps as i128 * days as i128) / (10_000 * 365)
+        let numerator = principal
+            .checked_mul(rate_bps as i128)
+            .expect("Overflow: principal × rate_bps")
+            .checked_mul(days as i128)
+            .expect("Overflow: (principal × rate_bps) × days");
+        numerator / (10_000_i128 * 365)
     }
 
     fn push_loan_id_for_borrower(env: &Env, borrower: &Address, loan_id: u32) {
@@ -348,3 +366,6 @@ impl LendingContract {
         }
     }
 }
+
+#[cfg(test)]
+mod test;
