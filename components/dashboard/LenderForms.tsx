@@ -530,7 +530,7 @@ export function LenderForms({
             </div>
           </div>
 
-          
+          <a
             href={`https://stellar.expert/explorer/testnet/tx/${successTx.hash}`}
             target="_blank"
             rel="noopener noreferrer"

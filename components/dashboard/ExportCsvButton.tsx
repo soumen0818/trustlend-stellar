@@ -1,7 +1,7 @@
 "use client";
 
 interface ExportCsvButtonProps {
-  data: any[];
+  data: Record<string, unknown>[];
   filename?: string;
 }
 
