@@ -504,7 +504,7 @@ export default async function LenderPoolsPage() {
                         </td>
                         <td>
                           {isLikelyTxHash(txHash) ? (
-                            
+                            <a
                               href={buildStellarTxVerificationUrl(txHash)}
                               target="_blank"
                               rel="noopener noreferrer"
