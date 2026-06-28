@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "cross-env NODE_OPTIONS=--dns-result-order=ipv4first next start",
     "lint": "eslint",
+    "test": "vitest run",
     "e2e:seed": "node scripts/e2e-seed-and-run.mjs"
   },
   "dependencies": {
@@ -31,10 +32,12 @@
     "@types/pdfkit": "^0.17.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^2.1.9",
     "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.3",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "2.1.9"
   }
 }
