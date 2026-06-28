@@ -3390,3 +3390,10 @@ a {
   padding: 0 2rem;
   font-size: 0.9rem;
 }
+
+/* ── SEP-24 fiat off-ramp spinner ── */
+@keyframes sep24-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
