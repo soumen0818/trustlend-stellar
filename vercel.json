@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/payment-due",
       "schedule": "0 * * * *"
+    },
+    {
+      "path": "/api/cron/default-management",
+      "schedule": "0 2 * * *"
     }
   ]
 }
